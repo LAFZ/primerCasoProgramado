@@ -23,7 +23,7 @@ public class Controlador_FRM_SeleccionDeArchivo implements ActionListener{
     public Controlador_FRM_SeleccionDeArchivo(FRM_SeleccionDeArchivo frm_SeleccionDeArchivo,  
            Controlador_FRM_MenuPrincipal controlador_FRM_MenuPrincipal,FRM_MenuPrincipal menuPrincipal,  Metodos_Login metodosLogin, ConexionBD conexion) {
        this.controlador_FRM_MenuPrincipal = controlador_FRM_MenuPrincipal;
-        this.login = new FRM_Login(menuPrincipal, metodosLogin, conexion);
+        this.login = new FRM_Login(menuPrincipal, metodosLogin, conexion, this);
         this.frm_SeleccionDeArchivo = frm_SeleccionDeArchivo;
        this.menuPrincipal = menuPrincipal;
     }
@@ -46,6 +46,7 @@ public class Controlador_FRM_SeleccionDeArchivo implements ActionListener{
         if(e.getActionCommand().equals("Continuar")){
             System.out.println("entro evento");
            // controlador_FRM_MenuPrincipal.METODO SET DE CONTROLADOR PRINCIPAL()
+            this.controlador_FRM_MenuPrincipal.setTipoDeArchivo(tipoDeArchivo);
             if(tipoDeArchivo==2){
             if(controlador_FRM_MenuPrincipal.verificarUsuarioBD()){
             login.setVisible(true);

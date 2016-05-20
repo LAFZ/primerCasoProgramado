@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.Controlador_FRM_Login;
+import Controlador.Controlador_FRM_SeleccionDeArchivo;
 import Modelo.ConexionBD;
 import javax.swing.JOptionPane;
 import Modelo.Metodos_Login;
@@ -15,10 +16,10 @@ public class FRM_Login extends javax.swing.JFrame {
    public Controlador_FRM_Login controlador;
    FRM_MenuPrincipal ventana;
                
-    public FRM_Login(FRM_MenuPrincipal ventana,Metodos_Login metodosLogin, ConexionBD conexion) {
+    public FRM_Login(FRM_MenuPrincipal ventana,Metodos_Login metodosLogin, ConexionBD conexion, Controlador_FRM_SeleccionDeArchivo seleccionArchivo) {
         initComponents();
         this.ventana=ventana;
-        controlador=new Controlador_FRM_Login(this,metodosLogin, conexion);
+        controlador=new Controlador_FRM_Login(this,metodosLogin, conexion, seleccionArchivo);
         this.jb_Login.addActionListener(controlador);
          this.setLocation(330,200);
         this.setVisible(false);
@@ -36,7 +37,7 @@ public class FRM_Login extends javax.swing.JFrame {
     }
     public void noHacerLogin()
     {
-        JOptionPane.showMessageDialog(null,"Aún no existen usuarios registrados por favor ingresar al módulo de Registro Usuarios.");
+        JOptionPane.showMessageDialog(null,"AÃºn no existen usuarios registrados por favor ingresar al mÃ³dulo de Registro Usuarios.");
         setVisible(false);
         ventana.setVisible(true);
     }
@@ -53,6 +54,14 @@ public class FRM_Login extends javax.swing.JFrame {
     {
         return this.jpwd_Password.getText();
     }
+    
+    public void compararLogin(){
+         /* if(!jl_usuario.getText().equals("") && !jpwd_Password.getText().equals("")){
+            if(registro.login(jt_usuario.getText() , jp_contrasenna.getText())){
+                this.dispose();
+                guiRegistro.setVisible(true);*/
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,7 +117,7 @@ public class FRM_Login extends javax.swing.JFrame {
     private void jpwd_PasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpwd_PasswordKeyPressed
         if(evt.getKeyCode()==10)
         {
-            controlador.buscar();
+            //controlador.buscar();
         }
     }//GEN-LAST:event_jpwd_PasswordKeyPressed
 

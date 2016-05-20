@@ -64,6 +64,7 @@ public class Controlador_FRM_MantenimientoUsuarios implements ActionListener{
      }
      public int setTipoDeArchivo(int tipoArchivoElegido){
      this.archivoElegido=tipoArchivoElegido;
+     
      return archivoElegido;
  }
 }

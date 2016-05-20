@@ -106,11 +106,17 @@ public class GUI_InformacionEstudiantes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jt_CedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_CedulaKeyPressed
-        //System.out.println("Codigo de la tecla: "+evt.getKeyCode());
-        if(evt.getKeyCode()==10)
-        {
-            controlador.buscar();
+       if(evt.getKeyCode()==10){
+            if(this.controlador.archivoElegido==1){
+            controlador.buscarEnArchivosPlanos();
+        }else
+        if(this.controlador.archivoElegido==2){
+            controlador.buscarBD();
+        }else
+        if(this.controlador.archivoElegido==3){
+            controlador.buscarXML();
         }
+      }
     }//GEN-LAST:event_jt_CedulaKeyPressed
 
 

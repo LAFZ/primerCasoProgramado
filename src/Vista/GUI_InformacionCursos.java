@@ -129,8 +129,16 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
 
     private void jt_SiglasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglasKeyPressed
         if(evt.getKeyCode()==10){
-            controlador.buscar();
+            if(this.controlador.archivoElegido==1){
+            controlador.buscarEnArchivosPlanos();
+        }else
+        if(this.controlador.archivoElegido==2){
+            controlador.buscarBD();
+        }else
+        if(this.controlador.archivoElegido==3){
+            controlador.buscarXML();
         }
+      }
     }//GEN-LAST:event_jt_SiglasKeyPressed
 
 

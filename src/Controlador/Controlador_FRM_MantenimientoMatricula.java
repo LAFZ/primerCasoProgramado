@@ -87,6 +87,7 @@ public class Controlador_FRM_MantenimientoMatricula implements ActionListener{
     public String colocarCodigo(){
         return this.conexion.devolverCodigo();
     }
+    
     public void buscar(){
         
         if(this.conexion.consultarMatricula(this.frm_Matricula.devolverCodigo())){
@@ -126,6 +127,7 @@ public class Controlador_FRM_MantenimientoMatricula implements ActionListener{
 //    }
 public int setTipoDeArchivo(int tipoArchivoElegido){
      this.archivoElegido=tipoArchivoElegido;
+     System.out.println("Tipo de archivo para la matricula "+tipoArchivoElegido);
      return archivoElegido;
  }
 }

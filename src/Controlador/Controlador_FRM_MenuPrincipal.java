@@ -39,7 +39,7 @@ this.metodosLogin= new Metodos_Login();
 this.mantenimientoEstudiantes=new FRM_MantenimientoEstudiantes(conexion);
 this.mantenimientoCursos=new FRM_MantenimientoCursos(conexion);
 this.mantenimientoMatricula=new FRM_MantenimientoMatricula(mantenimientoEstudiantes, mantenimientoCursos, conexion);
-this.login=new FRM_Login(menuPrincipal,metodosLogin,conexion);
+
 this.tipoDeArchivo=new FRM_SeleccionDeArchivo(this,menuPrincipal, metodosLogin, conexion);
 this.mantenimientoUsuarios =new FRM_MantenimientoUsuarios( conexion);
 this.tipoDeArchivo.setVisible(true);
@@ -71,6 +71,10 @@ this.tipoDeArchivo.setVisible(true);
   }
  public int setTipoDeArchivo(int tipoArchivoElegido){
      this.archivoElegido=tipoArchivoElegido;
+     this.mantenimientoCursos.controlador_FRM_MantenimientoCursos.setTipoDeArchivo(tipoArchivoElegido);
+     this.mantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.setTipoDeArchivo(tipoArchivoElegido);
+     this.mantenimientoUsuarios.controlador_FRM_MantenimientoUsuarios.setTipoDeArchivo(tipoArchivoElegido);
+     this.mantenimientoMatricula.controlador_FRM_Matricula.setTipoDeArchivo(tipoArchivoElegido);
      return archivoElegido;
      
  }

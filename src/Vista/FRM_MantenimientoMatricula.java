@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class FRM_MantenimientoMatricula extends javax.swing.JFrame {
 
-    Controlador_FRM_MantenimientoMatricula controlador_FRM_Matricula;
+    public Controlador_FRM_MantenimientoMatricula controlador_FRM_Matricula;
     DefaultTableModel modelo;
     public FRM_MantenimientoMatricula(FRM_MantenimientoEstudiantes mantenimientoEstudiantes, FRM_MantenimientoCursos mantenimientoCursos,ConexionBD conexion) {
         initComponents();
