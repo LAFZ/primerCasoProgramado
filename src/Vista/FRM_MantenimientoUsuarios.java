@@ -2,18 +2,20 @@
 package Vista;
 
 import Controlador.Controlador_FRM_MantenimientoUsuarios;
+import Modelo.ArchivosUsuarios;
 import Modelo.ConexionBD;
+import Modelo.MetodosUsuarios;
 import javax.swing.JOptionPane;
 
 
 public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
-
+MetodosUsuarios metodosUsuarios;
     public Controlador_FRM_MantenimientoUsuarios controlador_FRM_MantenimientoUsuarios;
-    public FRM_MantenimientoUsuarios(ConexionBD conexion) {
+    public FRM_MantenimientoUsuarios(ConexionBD conexion, MetodosUsuarios metodosUsuarios,ArchivosUsuarios archivosUsuarios) {
         initComponents();
         setVisible(false);
         this.setLocation(410,275);
-        this.controlador_FRM_MantenimientoUsuarios=new Controlador_FRM_MantenimientoUsuarios(this, conexion);
+        this.controlador_FRM_MantenimientoUsuarios=new Controlador_FRM_MantenimientoUsuarios(this, conexion, metodosUsuarios, archivosUsuarios);
         this.gUI_Botones1.agregarEventos(this.controlador_FRM_MantenimientoUsuarios);
         this.gUI_InformacionUsuarios1.agregarEventos(controlador_FRM_MantenimientoUsuarios);
         estadoInicial();
@@ -75,6 +77,11 @@ public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
         gUI_InformacionUsuarios1 = new Vista.GUI_InformacionUsuarios();
         jLabel1 = new javax.swing.JLabel();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(gUI_Botones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 350, 80));
         getContentPane().add(gUI_InformacionUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 210));
@@ -84,6 +91,10 @@ public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        this.controlador_FRM_MantenimientoUsuarios.escribirInformacionEnElArchivoUsuarios();
+    }//GEN-LAST:event_formComponentHidden
 
     
 

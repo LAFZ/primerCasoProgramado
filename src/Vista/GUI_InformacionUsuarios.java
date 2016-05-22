@@ -117,9 +117,17 @@ public class GUI_InformacionUsuarios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jl_IDUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jl_IDUsuarioKeyPressed
-        if(evt.getKeyCode()==10){
-            controlador.buscar();
+       if(evt.getKeyCode()==10){
+            if(this.controlador.archivoElegido==1){
+            controlador.buscarEnArchivosPlanos();
+        }else
+        if(this.controlador.archivoElegido==2){
+            controlador.buscarBD();
+        }else
+        if(this.controlador.archivoElegido==3){
+            controlador.buscarXML();
         }
+      }
     }//GEN-LAST:event_jl_IDUsuarioKeyPressed
 
 

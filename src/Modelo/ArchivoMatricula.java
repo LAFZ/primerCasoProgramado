@@ -11,13 +11,15 @@ import java.util.ArrayList;
 public class ArchivoMatricula {
     ObjectOutputStream archivoSalidaMatricula;
     ObjectInputStream archivoEntradaMatricula;
-
+    ArrayList <Matricula> arrayMatricula;
+    ArrayList<Matricula> array;
     public ArchivoMatricula() {
-        if(cargarArchivoMatricula()){
-            System.out.println("Se cargo el archivo matricula de forma correcta");
-        }else{
-            System.out.println("Error al cargar el archivo.");
-        }
+        cargarArchivoMatricula();
+        array=new ArrayList<Matricula>();
+        arrayMatricula=new ArrayList<Matricula>();
+        
+        devolverInformacionDelArchivoMatricula();
+           
     }
     public boolean cargarArchivoMatricula(){
     boolean existe=false;
@@ -46,7 +48,7 @@ public class ArchivoMatricula {
         }
     }
     public ArrayList<Matricula> devolverInformacionDelArchivoMatricula(){
-        ArrayList<Matricula> array=new ArrayList<Matricula>();
+        //ArrayList<Matricula> array=new ArrayList<Matricula>();
         try{
             while(true){
                 array.add((Matricula)this.archivoEntradaMatricula.readObject());
@@ -56,4 +58,21 @@ public class ArchivoMatricula {
         }
         return array;
     }
+    public boolean consultarMatricula(int codigo){
+        devolverInformacionDelArchivoMatricula();
+        arrayMatricula = array;
+        System.out.println(""+array);
+        boolean itemEncontrado=false;
+        System.out.println("consultar matricula en archivo"+arrayMatricula);
+        for(int i=0;i<arrayMatricula.size();i++)
+        {            
+            System.out.println("entro al for");
+            if(this.arrayMatricula.get(i).getCodigo().equals(codigo)){
+            System.out.println("encontro al usuario");
+            itemEncontrado=true;
+            }     
+        }
+        return itemEncontrado;
+    }
 }
+    

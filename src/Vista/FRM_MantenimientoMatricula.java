@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.Controlador_FRM_MantenimientoMatricula;
+import Modelo.ArchivoMatricula;
 import Modelo.ConexionBD;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,10 +12,10 @@ public class FRM_MantenimientoMatricula extends javax.swing.JFrame {
 
     public Controlador_FRM_MantenimientoMatricula controlador_FRM_Matricula;
     DefaultTableModel modelo;
-    public FRM_MantenimientoMatricula(FRM_MantenimientoEstudiantes mantenimientoEstudiantes, FRM_MantenimientoCursos mantenimientoCursos,ConexionBD conexion) {
+    public FRM_MantenimientoMatricula(FRM_MantenimientoEstudiantes mantenimientoEstudiantes, FRM_MantenimientoCursos mantenimientoCursos,ConexionBD conexion, ArchivoMatricula archivoMatricula) {
         initComponents();
         this.setLocation(330,200);
-        this.controlador_FRM_Matricula=new Controlador_FRM_MantenimientoMatricula(mantenimientoEstudiantes, mantenimientoCursos, this, conexion);
+        this.controlador_FRM_Matricula=new Controlador_FRM_MantenimientoMatricula(mantenimientoEstudiantes, mantenimientoCursos, this, conexion, archivoMatricula);
         modelo=new DefaultTableModel();
         this.tbl_Matricula.setModel(modelo);
         colocarTitulosTabla();
@@ -141,6 +142,11 @@ public class FRM_MantenimientoMatricula extends javax.swing.JFrame {
 
         setMinimumSize(new java.awt.Dimension(683, 384));
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(gUI_Botones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 360, 80));
 
@@ -200,6 +206,10 @@ public class FRM_MantenimientoMatricula extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        this.controlador_FRM_Matricula.escribirInformacionEnElArchivoUsuarios();
+    }//GEN-LAST:event_formComponentHidden
 
     /**
      * @param args the command line arguments

@@ -5,8 +5,12 @@
  */
 package Controlador;
 
+import Modelo.ArchivoMatricula;
+import Modelo.ArchivosUsuarios;
 import Modelo.ConexionBD;
+import Modelo.MetodosUsuarios;
 import Modelo.Metodos_Login;
+import Modelo.Metodos_XML_Usuario;
 import Vista.FRM_Login;
 import Vista.FRM_MantenimientoCursos;
 import Vista.FRM_MantenimientoEstudiantes;
@@ -31,17 +35,24 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
     FRM_MenuPrincipal menuPrincipal;
     ConexionBD conexion;
     Metodos_Login metodosLogin;
+    MetodosUsuarios metodosUsuarios;
     int archivoElegido=0;
-
+    ArchivosUsuarios archivosUsuarios;
+    ArchivoMatricula archivoMatricula;
+    Metodos_XML_Usuario metodos_XML_Usuario;
 public Controlador_FRM_MenuPrincipal(FRM_MenuPrincipal menuPrincipal){
+this.archivosUsuarios=new ArchivosUsuarios();
+this.archivoMatricula=new ArchivoMatricula();
 this.conexion = new ConexionBD();
-this.metodosLogin= new Metodos_Login();
+this.metodosUsuarios=new MetodosUsuarios();
+this.metodosLogin= new Metodos_Login(metodosUsuarios, archivosUsuarios);
 this.mantenimientoEstudiantes=new FRM_MantenimientoEstudiantes(conexion);
 this.mantenimientoCursos=new FRM_MantenimientoCursos(conexion);
-this.mantenimientoMatricula=new FRM_MantenimientoMatricula(mantenimientoEstudiantes, mantenimientoCursos, conexion);
-
-this.tipoDeArchivo=new FRM_SeleccionDeArchivo(this,menuPrincipal, metodosLogin, conexion);
-this.mantenimientoUsuarios =new FRM_MantenimientoUsuarios( conexion);
+this.mantenimientoMatricula=new FRM_MantenimientoMatricula(mantenimientoEstudiantes, mantenimientoCursos, conexion, archivoMatricula);
+this.login = new FRM_Login(menuPrincipal, metodosLogin, conexion, metodos_XML_Usuario);
+this.tipoDeArchivo=new FRM_SeleccionDeArchivo(this,menuPrincipal, metodosLogin, conexion, login, metodos_XML_Usuario);
+this.mantenimientoUsuarios =new FRM_MantenimientoUsuarios( conexion, metodosUsuarios, archivosUsuarios);
+this.metodos_XML_Usuario=new Metodos_XML_Usuario(mantenimientoUsuarios);
 this.tipoDeArchivo.setVisible(true);
 
 }
@@ -75,6 +86,7 @@ this.tipoDeArchivo.setVisible(true);
      this.mantenimientoEstudiantes.controlador_FRM_MantenimientoEstudiantes.setTipoDeArchivo(tipoArchivoElegido);
      this.mantenimientoUsuarios.controlador_FRM_MantenimientoUsuarios.setTipoDeArchivo(tipoArchivoElegido);
      this.mantenimientoMatricula.controlador_FRM_Matricula.setTipoDeArchivo(tipoArchivoElegido);
+     this.login.controlador.setTipoDeArchivo(tipoArchivoElegido);
      return archivoElegido;
      
  }

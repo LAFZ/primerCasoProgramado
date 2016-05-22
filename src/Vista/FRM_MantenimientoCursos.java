@@ -91,7 +91,7 @@ public class FRM_MantenimientoCursos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-
+        this.controlador_FRM_MantenimientoCursos.escribirInformacionEnElArchivoCursos();
     }//GEN-LAST:event_formComponentHidden
 
     /**

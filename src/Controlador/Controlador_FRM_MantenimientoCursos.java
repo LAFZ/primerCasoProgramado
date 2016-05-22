@@ -6,14 +6,20 @@ import Modelo.ArchivoCursos;
 import Modelo.ConexionBD;
 import Modelo.Curso;
 import Modelo.MetodosCursos;
+import Modelo.Metodos_XML_Cursos;
 import Vista.FRM_MantenimientoCursos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 
 public class Controlador_FRM_MantenimientoCursos implements ActionListener{
     ConexionBD conexion;
+    Metodos_XML_Cursos metodos_XML_Cursos;
     FRM_MantenimientoCursos mantenimientoCursos;
     public int archivoElegido=0;
     public MetodosCursos metodos;
@@ -22,7 +28,8 @@ public class Controlador_FRM_MantenimientoCursos implements ActionListener{
 public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos mantenimientoCursos, ConexionBD conexion)
 {
     this.mantenimientoCursos=mantenimientoCursos;
-     this.conexion=conexion;
+    metodos_XML_Cursos= new Metodos_XML_Cursos(mantenimientoCursos);
+    this.conexion=conexion;
      metodos=new MetodosCursos();
     archivoCursos=new ArchivoCursos();
     this.archivoCursos.cargarArchivoCurso();
@@ -57,7 +64,10 @@ public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos mantenimiento
                 this.mantenimientoCursos.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                metodos_XML_Cursos.guardarEnXML(mantenimientoCursos.devolverInformacion());
+                mantenimientoCursos.mostrarMensaje("Información agregada al archivo XML de forma correcta.");
+                mantenimientoCursos.limpiar();
+                mantenimientoCursos.estadoInicial();
             }
             
         }
@@ -76,7 +86,10 @@ public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos mantenimiento
                 this.mantenimientoCursos.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                 metodos_XML_Cursos.modificarInformacionDelXml(mantenimientoCursos.devolverInformacion());
+                mantenimientoCursos.mostrarMensaje("Información modificada en el archivo XML de forma correcta.");
+                mantenimientoCursos.limpiar();
+                mantenimientoCursos.estadoInicial();
             }
             
         }
@@ -92,7 +105,10 @@ public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos mantenimiento
                 this.mantenimientoCursos.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                metodos_XML_Cursos.eliminarInformacionDelXml(mantenimientoCursos.devolverSigla());
+                mantenimientoCursos.mostrarMensaje("Información eliminada del archivo XML de forma correcta.");
+                mantenimientoCursos.limpiar();
+                mantenimientoCursos.estadoInicial();
             }
             
         }
@@ -135,7 +151,19 @@ public Controlador_FRM_MantenimientoCursos(FRM_MantenimientoCursos mantenimiento
     }
     //////////////////////////////////////Metodo para buscar estudiantes en XML///////////////////////////////////////////////////
    public void buscarXML(){
-   
+               if(metodos_XML_Cursos.consultarInformacionDelXml(mantenimientoCursos.devolverSigla()))
+        {
+            mantenimientoCursos.mostrarInformacion(metodos.getArregloInformacion());
+            mantenimientoCursos.habilitarOpciones();
+            
+            mantenimientoCursos.mostrarMensaje("Información encontrada con la cédula : "+mantenimientoCursos.devolverSigla());
+        }
+        else
+        {
+            mantenimientoCursos.mostrarMensaje("No se encontró información con la cédula: "+mantenimientoCursos.devolverSigla());
+            mantenimientoCursos.habilitarAgregar();
+        }   
+        mantenimientoCursos.deshabilitarSigla();
    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int setTipoDeArchivo(int tipoArchivoElegido){

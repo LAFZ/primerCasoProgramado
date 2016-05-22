@@ -5,6 +5,7 @@ import Controlador.Controlador_FRM_MenuPrincipal;
 import Controlador.Controlador_FRM_SeleccionDeArchivo;
 import Modelo.ConexionBD;
 import Modelo.Metodos_Login;
+import Modelo.Metodos_XML_Usuario;
 import javax.swing.ButtonGroup;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
@@ -20,12 +21,13 @@ public class FRM_SeleccionDeArchivo extends javax.swing.JFrame {
    private String buttonSelected = "gufwhuefef";
   
     
-    public FRM_SeleccionDeArchivo(Controlador_FRM_MenuPrincipal controlador_FRM_MenuPrincipal, FRM_MenuPrincipal menuPrincipal, Metodos_Login metodosLogin, ConexionBD conexion) {
+    public FRM_SeleccionDeArchivo(Controlador_FRM_MenuPrincipal controlador_FRM_MenuPrincipal, FRM_MenuPrincipal menuPrincipal, Metodos_Login metodosLogin, ConexionBD conexion, FRM_Login
+             login, Metodos_XML_Usuario metodos_XML_Usuario) {
         initComponents();
         this.login = login;
         this.setLocation(330,200);
         this.setVisible(false);
-        this.controlador=new Controlador_FRM_SeleccionDeArchivo( this, controlador_FRM_MenuPrincipal, menuPrincipal,   metodosLogin,  conexion);
+        this.controlador = new Controlador_FRM_SeleccionDeArchivo( this, login, controlador_FRM_MenuPrincipal, menuPrincipal,   metodosLogin,  conexion, metodos_XML_Usuario);
         this. agregarEventos();
         this.groupButton( );
         this.estadoInicial();

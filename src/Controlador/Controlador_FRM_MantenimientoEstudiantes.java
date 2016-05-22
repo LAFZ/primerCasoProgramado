@@ -6,7 +6,11 @@ import Modelo.ArchivoEstudiantes;
 import Modelo.ConexionBD;
 import Modelo.Estudiantes;
 import Modelo.MetodosEstudiantes;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import Modelo.Metodos_XML_Estudiantes;
 import Vista.FRM_MantenimientoEstudiantes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,13 +19,14 @@ import java.util.ArrayList;
 
 public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener {
     public MetodosEstudiantes metodos;
-    
+    Metodos_XML_Estudiantes metodos_XML_Estudiantes;
     ArchivoEstudiantes archivoEstudiantes;
     ConexionBD conexion;
     FRM_MantenimientoEstudiantes mantenimientoEstudiantes;
     public int archivoElegido=0;
     public Controlador_FRM_MantenimientoEstudiantes(FRM_MantenimientoEstudiantes mantenimientoEstudiantes, ConexionBD conexion)
     {
+        metodos_XML_Estudiantes= new Metodos_XML_Estudiantes(mantenimientoEstudiantes);
         this.mantenimientoEstudiantes=mantenimientoEstudiantes;
         this.conexion=conexion;
         metodos=new MetodosEstudiantes();
@@ -60,7 +65,10 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener 
                 this.mantenimientoEstudiantes.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                metodos_XML_Estudiantes.guardarEnXML(mantenimientoEstudiantes.devolverInformacion());
+                mantenimientoEstudiantes.mostrarMensaje("Información agregada al archivo XML de forma correcta.");
+                mantenimientoEstudiantes.limpiar();
+                mantenimientoEstudiantes.estadoInicial();
             }
         
         }
@@ -77,7 +85,10 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener 
                  this.mantenimientoEstudiantes.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                metodos_XML_Estudiantes.modificarInformacionDelXml(mantenimientoEstudiantes.devolverInformacion());
+                mantenimientoEstudiantes.mostrarMensaje("Información modificada en el archivo XML de forma correcta.");
+                mantenimientoEstudiantes.limpiar();
+                mantenimientoEstudiantes.estadoInicial();
             }
         }
         if(e.getActionCommand().equals("Eliminar")){
@@ -93,7 +104,10 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener 
                 this.mantenimientoEstudiantes.estadoInicial();
             }else
             if(archivoElegido==3){
-                buscarXML();
+                metodos_XML_Estudiantes.eliminarInformacionDelXml(mantenimientoEstudiantes.devolverCedula());
+                mantenimientoEstudiantes.mostrarMensaje("Información eliminada del archivo XML de forma correcta.");
+                mantenimientoEstudiantes.limpiar();
+                mantenimientoEstudiantes.estadoInicial();
             }
         }
     }
@@ -134,7 +148,19 @@ public class Controlador_FRM_MantenimientoEstudiantes implements ActionListener 
     }
     //////////////////////////////////////Metodo para buscar estudiantes en XML//////////////////////////////////////
     public void buscarXML(){
-    
+        if(metodos_XML_Estudiantes.consultarInformacionDelXml(mantenimientoEstudiantes.devolverCedula()))
+        {
+            mantenimientoEstudiantes.mostrarInformacion(metodos.getArregloInformacion());
+            mantenimientoEstudiantes.habilitarOpciones();
+            
+            mantenimientoEstudiantes.mostrarMensaje("Información encontrada con la cédula : "+mantenimientoEstudiantes.devolverCedula());
+        }
+        else
+        {
+            mantenimientoEstudiantes.mostrarMensaje("No se encontró información con la cédula: "+mantenimientoEstudiantes.devolverCedula());
+            mantenimientoEstudiantes.habilitarAgregar();
+        }   
+        mantenimientoEstudiantes.deshabilitarCedula();
     }
     public int setTipoDeArchivo(int tipoArchivoElegido){
      this.archivoElegido=tipoArchivoElegido;

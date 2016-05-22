@@ -4,8 +4,10 @@ package Vista;
 import Controlador.Controlador_FRM_Login;
 import Controlador.Controlador_FRM_SeleccionDeArchivo;
 import Modelo.ConexionBD;
+import Modelo.MetodosUsuarios;
 import javax.swing.JOptionPane;
 import Modelo.Metodos_Login;
+import Modelo.Metodos_XML_Usuario;
 
 /**
  *
@@ -15,37 +17,17 @@ public class FRM_Login extends javax.swing.JFrame {
 
    public Controlador_FRM_Login controlador;
    FRM_MenuPrincipal ventana;
-               
-    public FRM_Login(FRM_MenuPrincipal ventana,Metodos_Login metodosLogin, ConexionBD conexion, Controlador_FRM_SeleccionDeArchivo seleccionArchivo) {
+   
+    public FRM_Login(FRM_MenuPrincipal ventana,Metodos_Login metodosLogin, ConexionBD conexion, Metodos_XML_Usuario metodos_XML_Usuario) {
         initComponents();
         this.ventana=ventana;
-        controlador=new Controlador_FRM_Login(this,metodosLogin, conexion, seleccionArchivo);
+        controlador=new Controlador_FRM_Login(this,metodosLogin, conexion, ventana, metodos_XML_Usuario);
         this.jb_Login.addActionListener(controlador);
          this.setLocation(330,200);
         this.setVisible(false);
        ;
     }
-    public void habilitarlogin(){
-        this.setVisible(true);
-    }
-    public void hacerLogin()
-    {
-        JOptionPane.showMessageDialog(null,"Existen usuarios registrados por tanto debe hacer login.");
-        System.out.println("no entre");
-        setVisible(true);
-        ventana.setVisible(true);
-    }
-    public void noHacerLogin()
-    {
-        JOptionPane.showMessageDialog(null,"AÃºn no existen usuarios registrados por favor ingresar al mÃ³dulo de Registro Usuarios.");
-        setVisible(false);
-        ventana.setVisible(true);
-    }
-    public void loginPositivo()
-    {
-        setVisible(false);
-        ventana.setVisible(true);
-    }
+    
     public String getJTUsuario()
     {
         return this.jt_usuario.getText();
@@ -55,13 +37,7 @@ public class FRM_Login extends javax.swing.JFrame {
         return this.jpwd_Password.getText();
     }
     
-    public void compararLogin(){
-         /* if(!jl_usuario.getText().equals("") && !jpwd_Password.getText().equals("")){
-            if(registro.login(jt_usuario.getText() , jp_contrasenna.getText())){
-                this.dispose();
-                guiRegistro.setVisible(true);*/
-    }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

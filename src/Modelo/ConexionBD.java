@@ -464,7 +464,37 @@ public boolean registrarMatricula(String informacion[])
         }
         return itemEncontrado;
     }
-     
+     public boolean consultarUsuarioLogin(String IDUsuario, String password)
+    {
+        ResultSet rs = null;
+        Statement cmd = null;
+        boolean itemEncontrado=false;
+        try {
+                cmd = con.createStatement();
+                System.out.println(""+IDUsuario+" "+password);
+                rs = cmd.executeQuery("SELECT * FROM usuarios where nombreUsuario='"+IDUsuario+"' AND password= '"+password+"'");
+                
+                while (rs.next()) 
+                {
+                                    
+                    String nombre=rs.getString("nombres");
+                    String apellidos=rs.getString("apellidos");
+                    //int edad = rs.getInt(2);
+                    itemEncontrado=true;
+                    
+                    System.out.println("Información de la BD: "+password); 
+                    System.out.println("Información de la BD: "+nombre);
+                    System.out.println("Información de la BD: "+apellidos);
+                }
+                rs.close();
+        }
+        catch(Exception e)
+        {
+            itemEncontrado=true;
+            System.out.println("SQLException ejecutando sentencia: " + e.getMessage());
+        }
+        return itemEncontrado;
+    }
     public boolean eliminarUsuario(String IDUsuario)
     {
         ResultSet rs = null;
