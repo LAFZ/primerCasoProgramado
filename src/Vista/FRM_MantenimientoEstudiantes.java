@@ -24,7 +24,7 @@ public class FRM_MantenimientoEstudiantes extends javax.swing.JFrame {
     
     public String devolverCedula()
     {
-        System.out.println("aqui");
+        
         return this.gUI_InformacionEstudiantes1.devolverCedula();
     }
     public String devolverNombre()

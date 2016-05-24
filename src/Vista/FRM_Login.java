@@ -77,6 +77,11 @@ public class FRM_Login extends javax.swing.JFrame {
         });
         getContentPane().add(jb_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 102, 39));
 
+        jpwd_Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpwd_PasswordActionPerformed(evt);
+            }
+        });
         jpwd_Password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jpwd_PasswordKeyPressed(evt);
@@ -100,6 +105,10 @@ public class FRM_Login extends javax.swing.JFrame {
     private void jb_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_LoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_LoginActionPerformed
+
+    private void jpwd_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpwd_PasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpwd_PasswordActionPerformed
 
     /**
      * @param args the command line arguments

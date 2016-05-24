@@ -33,7 +33,7 @@ public class ConexionBD {
     {
         try {
             String userName = "root";
-            String password = "114090413";
+            String password = "";
             String url = "jdbc:mysql://localhost:3306/Matricula";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, userName, password);

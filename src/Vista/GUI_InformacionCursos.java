@@ -24,8 +24,8 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     public String[] devolverInformacion(){
         String arreglo[];
         arreglo =new String[4];
-        arreglo[0]=this.jt_NombreDelCurso.getText();
-        arreglo[1]=this.jt_Siglas.getText();
+        arreglo[1]=this.jt_NombreDelCurso.getText();
+        arreglo[0]=this.jt_Siglas.getText();
         arreglo[2]=""+this.jcb_Creditos.getSelectedIndex();
         arreglo[3]=this.jt_Horario.getText();
         return arreglo;
@@ -47,9 +47,10 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
        return this.jt_Horario.getText();
    }
     public void mostrarInformacion(String[] arreglo){
-        this.jt_NombreDelCurso.setText(arreglo[0]);
-        this.jcb_Creditos.setSelectedItem(arreglo[1]);
-        this.jt_Horario.setText(arreglo[2]);
+        this.jt_Siglas.setText(arreglo[0]);
+        this.jt_NombreDelCurso.setText(arreglo[1]);
+        this.jcb_Creditos.setSelectedItem(arreglo[2]);
+        this.jt_Horario.setText(arreglo[3]);
     }
     public void limpiar()
     {

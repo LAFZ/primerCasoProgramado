@@ -5,17 +5,19 @@ import Controlador.Controlador_FRM_MantenimientoUsuarios;
 import Modelo.ArchivosUsuarios;
 import Modelo.ConexionBD;
 import Modelo.MetodosUsuarios;
+import Modelo.Metodos_XML_Usuario;
 import javax.swing.JOptionPane;
 
 
 public class FRM_MantenimientoUsuarios extends javax.swing.JFrame {
 MetodosUsuarios metodosUsuarios;
+
     public Controlador_FRM_MantenimientoUsuarios controlador_FRM_MantenimientoUsuarios;
-    public FRM_MantenimientoUsuarios(ConexionBD conexion, MetodosUsuarios metodosUsuarios,ArchivosUsuarios archivosUsuarios) {
+    public FRM_MantenimientoUsuarios(ConexionBD conexion, MetodosUsuarios metodosUsuarios,ArchivosUsuarios archivosUsuarios, Metodos_XML_Usuario metodos_XML_Usuario) {
         initComponents();
         setVisible(false);
         this.setLocation(410,275);
-        this.controlador_FRM_MantenimientoUsuarios=new Controlador_FRM_MantenimientoUsuarios(this, conexion, metodosUsuarios, archivosUsuarios);
+        this.controlador_FRM_MantenimientoUsuarios=new Controlador_FRM_MantenimientoUsuarios(this, conexion, metodosUsuarios, archivosUsuarios, metodos_XML_Usuario);
         this.gUI_Botones1.agregarEventos(this.controlador_FRM_MantenimientoUsuarios);
         this.gUI_InformacionUsuarios1.agregarEventos(controlador_FRM_MantenimientoUsuarios);
         estadoInicial();

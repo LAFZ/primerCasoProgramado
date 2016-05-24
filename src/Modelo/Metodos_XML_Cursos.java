@@ -50,15 +50,15 @@ public class Metodos_XML_Cursos
         
         if(cargarXML())
         {
-            ventana.mostrarMensaje("Ya existe un archivo XML creado, ya fue cargado y puede proceder a utilizarlo");
+            //ventana.mostrarMensaje("Ya existe un archivo XML de cursos creado, ya fue cargado y puede proceder a utilizarlo");
         }
         else
         {
             crearXML();
-            ventana.mostrarMensaje("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
+            //ventana.mostrarMensaje("No existía un archivo XML de cursos creado, ya fue creado y puede proceder a utilizarlo");
         }
         
-        arregloInformacion=new String[3];
+        arregloInformacion=new String[4];
         titulos = new ArrayList();
         valores = new ArrayList();
     }
@@ -117,8 +117,10 @@ public class Metodos_XML_Cursos
             Text text = document.createTextNode(arregloInformacion[0]);
             Element valor2 = document.createElement("nombre");
             Text text2 = document.createTextNode(arregloInformacion[1]);
-            Element valor3 = document.createElement("horario");
+            Element valor3 = document.createElement("creditos");
             Text text3 = document.createTextNode(arregloInformacion[2]);
+            Element valor4 = document.createElement("horario");
+            Text text4 = document.createTextNode(arregloInformacion[3]);
             
             raiz.appendChild(valor1);
             valor1.appendChild(text);
@@ -126,6 +128,8 @@ public class Metodos_XML_Cursos
             valor2.appendChild(text2);
             raiz.appendChild(valor3);
             valor3.appendChild(text3);
+             raiz.appendChild(valor4);
+            valor4.appendChild(text4);
             
             source = new DOMSource(document);
             result = new StreamResult(new java.io.File(nombreArchivo+".xml"));

@@ -40,7 +40,7 @@ public class FRM_SeleccionDeArchivo extends javax.swing.JFrame {
         this.jb_Continuar.addActionListener(controlador);
     }
     public void habilitarContinuar(){
-        System.out.println("entro habilitar");
+       
                     this.jb_Continuar.setEnabled(false);
         if(this.jr_ArchivosPlanos.isSelected()==true){
            

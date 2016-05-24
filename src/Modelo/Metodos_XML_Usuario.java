@@ -50,12 +50,12 @@ public class Metodos_XML_Usuario
         
         if(cargarXML())
         {
-            ventana.mostrarMensaje("Ya existe un archivo XML usuarios creado, ya fue cargado y puede proceder a utilizarlo");
+          //  ventana.mostrarMensaje("Ya existe un archivo XML usuarios creado, ya fue cargado y puede proceder a utilizarlo");
         }
         else
         {
             crearXML();
-            ventana.mostrarMensaje("No existía un archivo XML creado usuarios, ya fue creado y puede proceder a utilizarlo");
+            //ventana.mostrarMensaje("No existía un archivo XML  usuarios creado, ya fue creado y puede proceder a utilizarlo");
         }
         
         arregloInformacion=new String[3];
@@ -230,23 +230,36 @@ public class Metodos_XML_Usuario
          Element raiz = document.getDocumentElement();
          NodeList listaDeItems = raiz.getElementsByTagName("Usuarios");
          Node tag=null,datoContenido=null;
-
+         int   contador=-10;
+        
+         
          boolean itemEncontrado=false;
          
          for(int contadorItems=0; contadorItems<listaDeItems.getLength(); contadorItems++) 
          {   
              Node item = listaDeItems.item(contadorItems);
              NodeList datosItem = item.getChildNodes();
+             contador=-10;
              for(int contadorTags=0; contadorTags<datosItem.getLength(); contadorTags++) 
              {           
+                 
                  tag = datosItem.item(contadorTags); 
                  datoContenido = tag.getFirstChild();
 
-                 if(tag.getNodeName().equals("nombreUsuario") && datoContenido.getNodeValue().equals(""+nombreUsuario) &&
-                         tag.getNodeName().equals("password")&& datoContenido.getNodeValue().equals(""+password))
+                 if(tag.getNodeName().equals("nombreUsuario") && datoContenido.getNodeValue().equals(""+nombreUsuario)  ) 
                  {
-                    itemEncontrado=true;     
+                    contador=0;
                  }
+                 if(contador==1)
+                 {
+                    if(tag.getNodeName().equals("Password") && datoContenido.getNodeValue().equals(""+password) )
+                   {
+                       itemEncontrado=true;
+                       System.out.println("aqui entro 123");
+                   }
+                 }
+                 contador++;
+                 
                  
              }
 

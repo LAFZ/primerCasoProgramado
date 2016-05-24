@@ -50,12 +50,12 @@ public class Metodos_XML_Estudiantes
         
         if(cargarXML())
         {
-            ventana.mostrarMensaje("Ya existe un archivo XML creado, ya fue cargado y puede proceder a utilizarlo");
+            //ventana.mostrarMensaje("Ya existe un archivo XML de estudiantes creado, ya fue cargado y puede proceder a utilizarlo");
         }
         else
         {
             crearXML();
-            ventana.mostrarMensaje("No existía un archivo XML creado, ya fue creado y puede proceder a utilizarlo");
+            //ventana.mostrarMensaje("No existía un archivo XML de estudiantes  creado, ya fue creado y puede proceder a utilizarlo");
         }
         
         arregloInformacion=new String[3];

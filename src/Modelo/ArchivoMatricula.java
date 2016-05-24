@@ -13,11 +13,13 @@ public class ArchivoMatricula {
     ObjectInputStream archivoEntradaMatricula;
     ArrayList <Matricula> arrayMatricula;
     ArrayList<Matricula> array;
+    String arreglo[];
+    
     public ArchivoMatricula() {
         cargarArchivoMatricula();
         array=new ArrayList<Matricula>();
         arrayMatricula=new ArrayList<Matricula>();
-        
+        arreglo=new String[3];
         devolverInformacionDelArchivoMatricula();
            
     }
@@ -60,19 +62,27 @@ public class ArchivoMatricula {
     }
     public boolean consultarMatricula(int codigo){
         devolverInformacionDelArchivoMatricula();
-        arrayMatricula = array;
-        System.out.println(""+array);
+        arrayMatricula = devolverInformacionDelArchivoMatricula();
         boolean itemEncontrado=false;
-        System.out.println("consultar matricula en archivo"+arrayMatricula);
+        String codigoBueno=""+codigo;
+        codigoBueno=codigoBueno.trim();
         for(int i=0;i<arrayMatricula.size();i++)
-        {            
-            System.out.println("entro al for");
-            if(this.arrayMatricula.get(i).getCodigo().equals(codigo)){
+        {       
+            if(this.arrayMatricula.get(i).getCodigo().trim().equals(codigoBueno))
+            {
             System.out.println("encontro al usuario");
+            arreglo[2]=arrayMatricula.get(i).getCodigo();
+            arreglo[0]=arrayMatricula.get(i).getCedula();
+            arreglo[1]=arrayMatricula.get(i).getSigla();
             itemEncontrado=true;
             }     
         }
         return itemEncontrado;
     }
+    public String[] getInfoProfe()
+    {
+        return arreglo;
+    }
+            
 }
     

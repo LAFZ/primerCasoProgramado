@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class MetodosMatricula {
     ArrayList<Matricula>arrayMatricula;
-    String arregloInformacion[];
+    public String arregloInformacion[];
     ArchivoMatricula archivoMatricula;
     public MetodosMatricula(ArchivoMatricula archivoMatricula)
     {
@@ -60,7 +60,7 @@ public class MetodosMatricula {
     public boolean consultarMatriculaEnArchivo(int codigo){
         System.out.println("Metodos consultar matricula: "+codigo);    
          boolean itemEncontrado=false;
-         if(this.archivoMatricula.consultarMatricula(codigo)==true){
+         if(this.archivoMatricula.consultarMatricula(codigo)){
             itemEncontrado=true;
         }
          return itemEncontrado;
